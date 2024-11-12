@@ -10,3 +10,23 @@ services:
       - ./djackets_django:/djackets_django
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=djacketsdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - djackets-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=djacketsdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
+
+
+volumes:
+  djackets-db-data:
