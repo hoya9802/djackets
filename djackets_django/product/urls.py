@@ -11,4 +11,8 @@ urlpatterns = [
         views.LatestProductsList.as_view(),
         name='latest-product-list'
     ),
+    path(
+        'products/<slug:category_slug>/<slug:product_slug>/',
+        views.ProductDetail.as_view()
+    )
 ]
